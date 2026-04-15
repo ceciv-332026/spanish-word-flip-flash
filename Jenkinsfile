@@ -17,6 +17,12 @@ pipeline {
                 sh 'npm run build'
             }
         }
+       
+        stage('Install') {
+            steps {
+                sh 'npm install'
+            }
+        }
 
         stage('test') {
             parallel {
@@ -29,7 +35,9 @@ pipeline {
                     }
                     steps {
                         // Unit tests with Vitest
-                        sh 'npx vitest run --reporter=verbose'
+                        sh 'npm ci'
+                        sh './node_modules/.bin/vitest run --reporter=verbose'
+                        sh 'npx vitest --version'
                     }
                 }
             }
