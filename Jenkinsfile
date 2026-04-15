@@ -18,12 +18,6 @@ pipeline {
             }
         }
        
-        stage('Install') {
-            steps {
-                sh 'npm install'
-            }
-        }
-
         stage('test') {
             parallel {
                 stage('unit tests') {
